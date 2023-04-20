@@ -81,9 +81,9 @@ class FaberAgent(AriesAgent):
         if aip == 10:
             # define attributes to send for credential
             self.cred_attrs[cred_def_id] = {
-                "name": "Alice Smith",
-                "date": "2018-05-28",
-                "degree": "Maths",
+                "name": "Chan Sok",
+                "date": "2023-04-20",
+                "health_condition": "Covid 19",
                 "birthdate_dateint": birth_date.strftime(birth_date_format),
                 "timestamp": str(int(time.time())),
             }
