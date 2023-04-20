@@ -110,7 +110,7 @@ class FaberAgent(AriesAgent):
                 self.cred_attrs[cred_def_id] = {
                     "name": "Alice Smith",
                     "date": "2018-05-28",
-                    "degree": "Maths",
+                    "health_condition": "Covid 19",
                     "birthdate_dateint": birth_date.strftime(birth_date_format),
                     "timestamp": str(int(time.time())),
                 }
@@ -182,26 +182,26 @@ class FaberAgent(AriesAgent):
             req_attrs = [
                 {
                     "name": "name",
-                    "restrictions": [{"schema_name": "degree schema"}],
+                    "restrictions": [{"schema_name": "health_condition schema"}],
                 },
                 {
                     "name": "date",
-                    "restrictions": [{"schema_name": "degree schema"}],
+                    "restrictions": [{"schema_name": "health_condition schema"}],
                 },
             ]
             if revocation:
                 req_attrs.append(
                     {
-                        "name": "degree",
-                        "restrictions": [{"schema_name": "degree schema"}],
+                        "name": "health_condition",
+                        "restrictions": [{"schema_name": "health_condition schema"}],
                         "non_revoked": {"to": int(time.time() - 1)},
                     },
                 )
             else:
                 req_attrs.append(
                     {
-                        "name": "degree",
-                        "restrictions": [{"schema_name": "degree schema"}],
+                        "name": "health_condition",
+                        "restrictions": [{"schema_name": "health_condition schema"}],
                     }
                 )
             if SELF_ATTESTED:
@@ -215,7 +215,7 @@ class FaberAgent(AriesAgent):
                     "name": "birthdate_dateint",
                     "p_type": "<=",
                     "p_value": int(birth_date.strftime(birth_date_format)),
-                    "restrictions": [{"schema_name": "degree schema"}],
+                    "restrictions": [{"schema_name": "health_condition schema"}],
                 }
             ]
             indy_proof_request = {
@@ -245,26 +245,26 @@ class FaberAgent(AriesAgent):
                 req_attrs = [
                     {
                         "name": "name",
-                        "restrictions": [{"schema_name": "degree schema"}],
+                        "restrictions": [{"schema_name": "health_condition schema"}],
                     },
                     {
                         "name": "date",
-                        "restrictions": [{"schema_name": "degree schema"}],
+                        "restrictions": [{"schema_name": "health_condition schema"}],
                     },
                 ]
                 if revocation:
                     req_attrs.append(
                         {
-                            "name": "degree",
-                            "restrictions": [{"schema_name": "degree schema"}],
+                            "name": "health_condition",
+                            "restrictions": [{"schema_name": "health_condition schema"}],
                             "non_revoked": {"to": int(time.time() - 1)},
                         },
                     )
                 else:
                     req_attrs.append(
                         {
-                            "name": "degree",
-                            "restrictions": [{"schema_name": "degree schema"}],
+                            "name": "health_condition",
+                            "restrictions": [{"schema_name": "health_condition schema"}],
                         }
                     )
                 if SELF_ATTESTED:
@@ -278,7 +278,7 @@ class FaberAgent(AriesAgent):
                         "name": "birthdate_dateint",
                         "p_type": "<=",
                         "p_value": int(birth_date.strftime(birth_date_format)),
-                        "restrictions": [{"schema_name": "degree schema"}],
+                        "restrictions": [{"schema_name": "health_condition schema"}],
                     }
                 ]
                 indy_proof_request = {
@@ -402,11 +402,11 @@ async def main(args):
             endorser_role=faber_agent.endorser_role,
         )
 
-        faber_schema_name = "degree schema"
+        faber_schema_name = "health_condition schema"
         faber_schema_attrs = [
             "name",
             "date",
-            "degree",
+            "health_condition",
             "birthdate_dateint",
             "timestamp",
         ]
@@ -545,7 +545,7 @@ async def main(args):
                     raise Exception(f"Error invalid AIP level: {faber_agent.aip}")
 
             elif option == "2":
-                log_status("#20 Request proof of degree from alice")
+                log_status("#20 Request proof of health_condition from alice")
                 if faber_agent.aip == 10:
                     proof_request_web_request = (
                         faber_agent.agent.generate_proof_request_web_request(
@@ -594,7 +594,7 @@ async def main(args):
                     raise Exception(f"Error invalid AIP level: {faber_agent.aip}")
 
             elif option == "2a":
-                log_status("#20 Request * Connectionless * proof of degree from alice")
+                log_status("#20 Request * Connectionless * proof of health_condition from alice")
                 if faber_agent.aip == 10:
                     proof_request_web_request = (
                         faber_agent.agent.generate_proof_request_web_request(
